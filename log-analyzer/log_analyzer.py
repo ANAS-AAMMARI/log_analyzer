@@ -14,6 +14,7 @@ def write_report(stats, output_path):
         for level, count in stats.items():
             f.write(f"{level}: {count}\n")
 
+# main function to handle command line arguments
 def main():
     parser = argparse.ArgumentParser(description='Analyseur de logs')
     parser.add_argument('--input', default='log.txt', help='Fichier de log à analyser')
