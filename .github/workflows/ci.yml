@@ -14,26 +14,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+      - name: Aller dans le dossier log-analyzer
+        run: cd log-analyzer
+        shell: bash
 
-      - name: Install dependencies
+      - name: Installer les dépendances
         run: |
+          cd log-analyzer
           pip install -r requirements.txt
 
-      - name: Create test log file
+      - name: Créer un fichier log fictif
         run: |
-          echo "[INFO] Start\n[ERROR] Crash\n[WARNING] Slow response\n[INFO] Done" > log.txt
+          cd log-analyzer
+          echo "[INFO] Start" > log.txt
+          echo "[ERROR] Crash" >> log.txt
+          echo "[WARNING] Slow response" >> log.txt
+          echo "[INFO] Done" >> log.txt
 
-      - name: Run log analyzer
+      - name: Exécuter le script d'analyse
         run: |
+          cd log-analyzer
           python log_analyzer.py --input log.txt --output rapport.txt
           cat rapport.txt
 
-      - name: Check report file
+      - name: Vérifier le contenu du rapport
         run: |
+          cd log-analyzer
           grep "INFO: 2" rapport.txt
           grep "ERROR: 1" rapport.txt
           grep "WARNING: 1" rapport.txt
