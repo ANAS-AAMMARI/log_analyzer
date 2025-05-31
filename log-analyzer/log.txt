@@ -1,0 +1,5 @@
+[INFO] Server started
+[WARNING] Disk usage at 90%
+[ERROR] Could not connect to DB
+[INFO] Request received
+[ERROR] Timeout occurred
