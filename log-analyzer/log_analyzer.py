@@ -1,4 +1,6 @@
 import argparse
+from colorama import init, Fore
+init(autoreset=True)
 
 def parse_logs(file_path):
     stats = {'INFO': 0, 'WARNING': 0, 'ERROR': 0}
@@ -12,8 +14,11 @@ def parse_logs(file_path):
 def write_report(stats, output_path):
     with open(output_path, 'w') as f:
         for level, count in stats.items():
+            print(f"{Fore.GREEN if level == 'INFO' else Fore.YELLOW if level == 'WARNING' else Fore.RED}{level}: {count}")
             f.write(f"{level}: {count}\n")
 
+
+# main function to handle command line arguments
 def main():
     parser = argparse.ArgumentParser(description='Analyseur de logs')
     parser.add_argument('--input', default='log.txt', help='Fichier de log à analyser')
